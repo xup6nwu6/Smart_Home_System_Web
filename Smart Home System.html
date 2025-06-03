@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Home System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#eaf8f6] text-[#003f3b] font-inter">
+
+  <!-- 導覽列 -->
+  <div class="bg-gradient-to-b from-[#1abd76] to-[#20bcaf] p-6 flex justify-between items-center text-white">
+    <div class="font-medium flex items-center">
+      所有設備 
+      <img src="icon/chevron-down.png" alt="下拉" class="ml-2">
+    </div>
+    <div class="flex gap-6 items-center">
+      <button><img src="icon/notifications unread.png" alt="通知"></button>
+      <button><img src="icon/menu.png" alt="選單"></button>
+    </div>
+  </div>
+
+  <!-- 主內容 -->
+  <div class="max-w-[1392px] w-full mx-auto px-4">
+    <div class="p-6 mt-4">
+
+      <!-- 按鈕群 -->
+      <div class="flex gap-6 mb-10">
+        <button id="btn-device" class="bg-[#00B686] text-white px-5 py-2 rounded-full font-semibold">我的設備</button>
+        <button id="btn-analysis" class="bg-[#4DC5BF] text-white px-5 py-2 rounded-full font-medium">用電分析</button>
+        <button id="btn-schedule" class="bg-[#4DC5BF] text-white px-5 py-2 rounded-full font-medium">排程設定</button>
+      </div>
+
+      <!-- 我的設備區塊 -->
+      <div id="device-section">
+        <div class="text-xl font-medium mb-8">
+          即時用電 <span class="text-2xl font-semibold">1.0325</span> kWh
+        </div>
+
+        <div class="flex justify-between items-center mb-8">
+          <button class="flex items-center bg-[#4dc5bf] text-white px-5 py-2 rounded-full font-medium">
+            用電量
+            <img src="icon/chevron-down.png" alt="下拉" class="ml-2">
+          </button>
+          <button class="bg-[#4dc5bf] p-2 rounded-full">
+            <img src="icon/add.png" alt="新增設備">
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- 冷氣 -->
+          <div id="ac-card" class="bg-[#d6f1ed] rounded-3xl px-10 py-8 relative cursor-pointer">
+            <div class="absolute top-9 right-10 w-5 h-5 bg-[#00e676] rounded-full"></div>
+            <div class="font-medium text-lg mb-2">冷氣</div>
+            <div class="flex justify-center">
+              <img src="icon/device/air conditioning.png" alt="冷氣" class="mb-3">
+            </div>
+            <div class="text-base font-medium">
+              即時用電 
+              <span class="text-[20px] font-semibold ml-3 mr-2">12.3</span>
+              <span class="text-xs">w</span>
+            </div>
+          </div>
+          <!-- 暖氣 -->
+          <div class="bg-[#d6f1ed] rounded-3xl px-10 py-8 relative">
+            <div class="absolute top-9 right-10 w-5 h-5 bg-[#9aafaf] rounded-full"></div>
+            <div class="font-medium text-lg mb-2">暖氣</div>
+            <div class="flex justify-center">
+              <img src="icon/device/heater.png" alt="暖氣" class="mb-3">
+            </div>
+            <div class="text-base font-medium">
+              即時用電 
+              <span class="text-[20px] font-semibold ml-3 mr-2">0.0</span>
+              <span class="text-xs">w</span>
+            </div>
+          </div>
+          <!-- 除濕機 -->
+          <div class="bg-[#d6f1ed] rounded-3xl px-10 py-8 relative">
+            <div class="absolute top-9 right-10 w-5 h-5 bg-[#9aafaf] rounded-full"></div>
+            <div class="font-medium text-lg mb-2">除濕機</div>
+            <div class="flex justify-center">
+              <img src="icon/device/air purifier gen.png" alt="除濕機" class="mb-3">
+            </div>
+            <div class="text-base font-medium">
+              即時用電 
+              <span class="text-[20px] font-semibold ml-3 mr-2">0.0</span>
+              <span class="text-xs">w</span>
+            </div>
+          </div>
+          <!-- 風扇 -->
+          <div class="bg-[#d6f1ed] rounded-3xl px-10 py-8 relative">
+            <div class="absolute top-9 right-10 w-5 h-5 bg-[#9aafaf] rounded-full"></div>
+            <div class="font-medium text-lg mb-2">風扇</div>
+            <div class="flex justify-center">
+              <img src="icon/device/fan.png" alt="風扇" class="mb-3">
+            </div>
+            <div class="text-base font-medium">
+              即時用電 
+              <span class="text-[20px] font-semibold ml-3 mr-2">0.0</span>
+              <span class="text-xs">w</span>
+            </div>
+          </div>
+          <!-- 房間燈 -->
+          <div class="bg-[#d6f1ed] rounded-3xl px-10 py-8 relative">
+            <div class="absolute top-9 right-10 w-5 h-5 bg-[#9aafaf] rounded-full"></div>
+            <div class="font-medium text-lg mb-2">房間燈</div>
+            <div class="flex justify-center">
+              <img src="icon/device/light.png" alt="房間燈" class="mb-3">
+            </div>
+            <div class="text-base font-medium">
+              即時用電 
+              <span class="text-[20px] font-semibold ml-3 mr-2">0.0</span>
+              <span class="text-xs">w</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 冷氣 Popup Modal -->
+      <div id="ac-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-[#eaf8f6] rounded-3xl w-[720px] h-[640px] max-w-full max-h-[80vh] overflow-y-auto">
+          <!-- Header -->
+          <div class="bg-gradient-to-b from-[#23c18c] to-[#00b5ad] text-white flex items-center justify-between px-6 py-6 rounded-t-xl">
+            <h2 class="text-lg font-semibold">冷氣</h2>
+            <button id="close-popup">
+              <img src="icon/close.png" alt="關閉" class="w-6 h-6">
+            </button>
+          </div>
+          <!-- Modal 內容 -->
+          <div class="p-6">
+            <div class="flex justify-between items-center mt-4">
+              <div class="flex gap-6">
+                <button class="bg-[#00b686] text-white px-5 py-2 rounded-full font-semibold">當前狀態</button>
+                <button class="bg-[#4dc5bf] text-white px-5 py-2 rounded-full font-medium">用電分析</button>
+                <button class="bg-[#4dc5bf] text-white px-5 py-2 rounded-full font-medium">排程設定</button>
+              </div>
+              <button class="bg-[#4dc5bf] p-2 rounded-full">
+                <img src="icon/more.png" alt="更多">
+              </button>
+            </div>
+
+            <!-- 運行狀態 -->
+            <div class="flex justify-center items-center mt-[72px] mb-8">
+              <div id="status-text" class="text-[18px] font-semibold mr-6">運行中</div>
+              <button id="toggle-status-btn" class="bg-[#00e676] p-2 rounded-full flex items-center justify-center">
+                <img src="icon/power.png" alt="開關">
+              </button>
+            </div>
+
+            <div class="flex justify-center">
+              <img src="icon/device/air conditioning.png" alt="冷氣" class="mb-9">
+            </div>
+
+            <div class="mx-auto w-[246px] flex justify-between items-baseline mb-8">
+              <div class="text-[16px] font-semibold">即時用電</div>
+              <div class="flex items-baseline justify-end">
+                <div id="status-value" class="text-[20px] font-semibold mr-[10px]">12.3</div>
+                <div class="text-[12px] font-medium">w</div>
+              </div>
+            </div>
+
+            <div class="mx-auto w-[246px] flex justify-between items-baseline">
+              <div class="text-[16px] font-semibold">清洗提醒</div>
+              <div class="flex items-baseline justify-end">
+                <div class="text-[20px] font-semibold mr-[10px]">14</div>
+                <div class="text-[12px] font-medium">天</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 用電分析區塊 -->
+      <div id="analysis-section" class="hidden">
+        <div class="text-xl font-medium mb-8">
+          總用電量 <span class="text-2xl font-semibold">2.739</span> kWh
+        </div>
+
+        <div class="flex gap-4 mb-8">
+          <button class="flex items-center bg-[#4dc5bf] text-white px-5 py-2 rounded-full font-medium">
+            日
+            <img src="icon/chevron-down.png" alt="下拉" class="ml-2">
+          </button>
+          <button class="flex items-center bg-[#4dc5bf] text-white px-5 py-2 rounded-full font-medium">
+            全部設備
+            <img src="icon/chevron-down.png" alt="下拉" class="ml-2">
+          </button>
+        </div>
+
+        <img src="icon/chart/chart.png" alt="用電分析圖表">
+       
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const deviceButton = document.getElementById('btn-device');
+    const analysisButton = document.getElementById('btn-analysis');
+    const scheduleButton = document.getElementById('btn-schedule');
+    const deviceSection = document.getElementById('device-section');
+    const analysisSection = document.getElementById('analysis-section');
+
+    function setActive(button) {
+      [deviceButton, analysisButton, scheduleButton].forEach(btn => {
+        btn.classList.remove('bg-[#00B686]', 'font-semibold');
+        btn.classList.add('bg-[#4DC5BF]', 'font-medium');
+      });
+      button.classList.remove('bg-[#4DC5BF]', 'font-medium');
+      button.classList.add('bg-[#00B686]', 'font-semibold');
+    }
+
+    deviceButton.addEventListener('click', () => {
+      setActive(deviceButton);
+      deviceSection.classList.remove('hidden');
+      analysisSection.classList.add('hidden');
+    });
+
+    analysisButton.addEventListener('click', () => {
+      setActive(analysisButton);
+      deviceSection.classList.add('hidden');
+      analysisSection.classList.remove('hidden');
+    });
+
+  </script>
+    <script>
+    const acCard = document.getElementById('ac-card');
+    const acPopup = document.getElementById('ac-popup');
+    const closeBtn = document.getElementById('close-popup');
+    acCard.addEventListener('click', () => {
+      acPopup.classList.remove('hidden');
+    });
+    closeBtn.addEventListener('click', () => {
+      acPopup.classList.add('hidden');
+    });
+  </script>
+
+  <script>
+    const statusText = document.getElementById('status-text');
+    const statusValue = document.getElementById('status-value');
+    const toggleBtn = document.getElementById('toggle-status-btn');
+    toggleBtn.addEventListener('click', () => {
+      if (statusText.textContent === '運行中') {
+        statusText.textContent = '待機中';
+        statusValue.textContent = '0.0';
+        toggleBtn.classList.remove('bg-[#00e676]');
+        toggleBtn.classList.add('bg-[#9aafae]');
+      } else {
+        statusText.textContent = '運行中';
+        statusValue.textContent = '12.3';
+        toggleBtn.classList.remove('bg-[#9aafae]');
+        toggleBtn.classList.add('bg-[#00e676]');
+      }
+    });
+  </script>
+
+</body>
+</html>
